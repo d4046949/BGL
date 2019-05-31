@@ -11,7 +11,7 @@ namespace GitHubMvc.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(null);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;

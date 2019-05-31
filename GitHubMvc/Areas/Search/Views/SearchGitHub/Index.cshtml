@@ -1,7 +1,11 @@
-﻿
+﻿@model GitHubMvc.Areas.Search.Models.SearchModel
+
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
+
+@Html.Partial("Search", Model)
 
