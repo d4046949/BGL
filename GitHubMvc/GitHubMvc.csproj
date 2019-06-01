@@ -169,6 +169,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructureMapStartUp.cs" />
+    <Compile Include="CustomAttributes\PageAttribute.cs" />
     <Compile Include="Areas\Search\SearchAreaRegistration.cs" />
     <Compile Include="Areas\Search\Controllers\SearchGitHubController.cs" />
     <Compile Include="Areas\Search\Models\SearchModel.cs" />
@@ -214,6 +215,8 @@
     <Content Include="Mvc.sitemap">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Search\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Search\Views\SearchGitHub\ProjectDetails.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

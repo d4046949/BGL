@@ -3,10 +3,22 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using GitHubMvc.Areas.Search.Models;
+using GitHubMvc.CustomAttributes;
 using GitHubMvc.Utilities;
+using Newtonsoft.Json;
 
 namespace GitHubMvc.Areas.Search.Controllers
 {
+
+    public class UserProfile
+    {
+        [JsonProperty("name")]
+        public string FullName { get; set; }
+        public string Location { get; set; }
+        [JsonProperty("avatar_url")]
+        public string AvatarPath { get; set; }
+    }
+
     public class SearchGitHubController : Controller
     {
         private readonly IConfig _configuration;
@@ -16,6 +28,7 @@ namespace GitHubMvc.Areas.Search.Controllers
             _configuration = configuration;
         }
 
+        [Page("Search GitHub")]
         public ActionResult Index()
         {
             return View(new SearchModel());
@@ -35,12 +48,21 @@ namespace GitHubMvc.Areas.Search.Controllers
 
                     var response = await client.GetAsync(url.ToString());
                     var result = await response.Content.ReadAsStringAsync();
-                    return Content(result, "application/json");
+
+                    var userProfileModel = JsonConvert.DeserializeObject<UserProfile>(result);
+                       
+                    return View("ProjectDetails", userProfileModel);
 
                 }
             }
 
             return View("Index");
+        }
+
+        [Page("Project Details")]
+        public ViewResult ProjectDetails()
+        {
+            return View();
         }
     }
 }
