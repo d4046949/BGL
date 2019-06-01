@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace GitHubMvc.Areas.Search.Models
 {
     public class SearchModel
     {
-        [Required]
+        [DisplayName("Project Name:")]
+        [Required(ErrorMessage = "Please enter a Project Name.")]
         public string Name { get; set; }
     }
 }

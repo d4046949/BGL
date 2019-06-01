@@ -7,5 +7,30 @@
 
 <h2>Index</h2>
 
-@Html.Partial("Search", Model)
+
+
+<div class="d-flex flex-row w-100">
+    <div class="card w-75">
+        <div class="card-body">
+            <h5 class="card-title">Search Github</h5>
+
+            @using (Html.BeginForm("Index", "SearchGitHub", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group row">
+                    @Html.LabelFor(x => x.Name, new { @class = "col-sm-2 col-form-label" })
+                    <div>
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Name,null, new {@class="text-danger"})
+                    </div>
+                </div>
+
+
+                <div class="d-flex flex-row justify-content-end">
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 

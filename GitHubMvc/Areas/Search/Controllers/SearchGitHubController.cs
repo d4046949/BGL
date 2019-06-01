@@ -22,20 +22,25 @@ namespace GitHubMvc.Areas.Search.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(SearchModel model)
         {
-            using (var client = new HttpClient())
+            if (ModelState.IsValid)
             {
-                client.DefaultRequestHeaders.Add("User-Agent", _configuration.GetUserAgent);
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("User-Agent", _configuration.GetUserAgent);
 
-                var url = new UriBuilder(_configuration.GetUrl);
+                    var url = new UriBuilder(_configuration.GetUrl);
 
-                var response = await client.GetAsync(url.ToString());
-                var result = await response.Content.ReadAsStringAsync();
-                return Content(result, "application/json");
+                    var response = await client.GetAsync(url.ToString());
+                    var result = await response.Content.ReadAsStringAsync();
+                    return Content(result, "application/json");
 
+                }
             }
+
+            return View("Index");
         }
     }
 }

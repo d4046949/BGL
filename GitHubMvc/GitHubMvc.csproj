@@ -170,7 +170,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructureMapStartUp.cs" />
     <Compile Include="Areas\Search\SearchAreaRegistration.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Search\Controllers\SearchGitHubController.cs" />
     <Compile Include="Areas\Search\Models\SearchModel.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
@@ -212,6 +211,9 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Areas\Search\Views\web.config" />
+    <Content Include="Mvc.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
