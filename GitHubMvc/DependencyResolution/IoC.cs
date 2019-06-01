@@ -1,3 +1,4 @@
+using GitHubApi;
 using StructureMap;
 
 namespace GitHubMvc.DependencyResolution
@@ -6,7 +7,12 @@ namespace GitHubMvc.DependencyResolution
     {
         public static IContainer Initialize()
         {
-            return new Container(c => c.AddRegistry<GitHuhMvcIoCRegistry>());
+            return new Container(c =>
+            {
+                c.AddRegistry<GitHubApiRegistry>();
+                c.AddRegistry<GitHuhMvcIoCRegistry>();
+
+            });
         }
     }
 }

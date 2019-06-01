@@ -1,31 +1,20 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using GitHubApi;
 using GitHubMvc.Areas.Search.Models;
 using GitHubMvc.CustomAttributes;
-using GitHubMvc.Utilities;
 using Newtonsoft.Json;
 
 namespace GitHubMvc.Areas.Search.Controllers
 {
-
-    public class UserProfile
-    {
-        [JsonProperty("name")]
-        public string FullName { get; set; }
-        public string Location { get; set; }
-        [JsonProperty("avatar_url")]
-        public string AvatarPath { get; set; }
-    }
-
     public class SearchGitHubController : Controller
     {
-        private readonly IConfig _configuration;
+        private readonly IGitHubApi _gitHubApi;
 
-        public SearchGitHubController(IConfig configuration)
+        public SearchGitHubController(IGitHubApi gitHubApi)
         {
-            _configuration = configuration;
+            _gitHubApi = gitHubApi;
         }
 
         [Page("Search GitHub")]
@@ -40,20 +29,20 @@ namespace GitHubMvc.Areas.Search.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var client = new HttpClient())
+                var userProfile = await _gitHubApi.GetUserProfileByName(model.Name);
+                var projectListing = await _gitHubApi.GetTop5ProjectsByUrl(userProfile.RepositoryUrl);
+
+                return View("ProjectDetails", new UserProfileViewModel
                 {
-                    client.DefaultRequestHeaders.Add("User-Agent", _configuration.GetUserAgent);
-
-                    var url = new UriBuilder(_configuration.GetUrl);
-
-                    var response = await client.GetAsync(url.ToString());
-                    var result = await response.Content.ReadAsStringAsync();
-
-                    var userProfileModel = JsonConvert.DeserializeObject<UserProfile>(result);
-                       
-                    return View("ProjectDetails", userProfileModel);
-
-                }
+                    FullName = userProfile.FullName,
+                    Location = userProfile.Location,
+                    AvatarPath = userProfile.AvatarPath,
+                    Projects = projectListing.Select(x => new ProjectViewModel
+                    {
+                        Name = x.Name,
+                        Rating = x.Rating
+                    }).ToList()
+                });
             }
 
             return View("Index");
@@ -66,3 +55,6 @@ namespace GitHubMvc.Areas.Search.Controllers
         }
     }
 }
+
+   
+

@@ -1,5 +1,5 @@
 
-using GitHubMvc.Utilities;
+using GitHubApi;
 using StructureMap;
 
 namespace GitHubMvc.DependencyResolution

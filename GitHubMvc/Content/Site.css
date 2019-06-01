@@ -1,14 +1,16 @@
-﻿
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+﻿html, body {
+    height: 100%;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.bg-dark-blue {
+    background-color: #002A3E;
 }
 
+#result-details-pane {
+    height: calc(100% - 56px);
+}
+
+.text-white {
+    
+    color: white;
+}
