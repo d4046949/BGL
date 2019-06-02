@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.Configuration;
 
-namespace GitHubApi
+namespace GitHubApi.Configuration
 {
     public class Config : IConfig
     {

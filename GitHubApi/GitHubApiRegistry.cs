@@ -1,4 +1,5 @@
-﻿using StructureMap;
+﻿using System.Net.Http;
+using StructureMap;
 
 namespace GitHubApi
 {
@@ -12,6 +13,8 @@ namespace GitHubApi
                 x.WithDefaultConventions();
                 x.Assembly("GitHubApi");
             });
+
+            For<HttpClient>().Use(x => new HttpClient());
         }
     }
 }

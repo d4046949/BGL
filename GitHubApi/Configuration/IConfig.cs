@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GitHubApi
+namespace GitHubApi.Configuration
 {
     public interface IConfig
     {
