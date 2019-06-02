@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using GitHubApi.Api;
 using GitHubApi.Configuration;
+using GitHubApi.CustomExceptions;
 using GitHubApi.Models;
 using GitHubApi.Tests.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -156,16 +157,39 @@ namespace GitHubApi.Tests
             //Setup
             _httpHandler.Setup(f => f.Send(It.IsAny<HttpRequestMessage>())).Returns(new HttpResponseMessage
             {
-                StatusCode = HttpStatusCode.OK,
+                StatusCode = HttpStatusCode.NotFound,
                 Content = new StringContent(
                     "{\"message\": \"Not Found\",\"documentation_url\": \"https://developer.github.com/v3/users/#get-a-single-user\"}")
             });
 
-            //Do
+            //Do & verify
+            Assert.ThrowsException<ResourceNotFoundOnGitHubException>(() => _api.GetUserProfileByName("My-awesome-project").GetAwaiter().GetResult());
+
+        }
+
+        [TestMethod]
+        public void Test_GetUserProfileReturnsValidObjectWhereNameExists()
+        {
+            _httpHandler.Setup(f => f.Send(It.IsAny<HttpRequestMessage>())).Returns(new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent("{\"name\": \"Rob Conery\",\"company\": \"Big Machine\",\"blog\": \"http://rob.conery.io\",\"location\": \"Honolulu, HI\"," +
+                                            "\"repos_url\": \"https://api.github.com/users/robconery/repos/\",\"avatar_url\": \"https://avatars0.githubusercontent.com/u/78586?v=4/\"}")
+            });
+
             var result = _api.GetUserProfileByName("My-awesome-project").GetAwaiter().GetResult();
 
-            //Verify
-            
+            var expectedResult = new UserProfile
+            {
+                FullName = "Rob Conery",
+                Location = "Honolulu, HI",
+                AvatarPath = "https://avatars0.githubusercontent.com/u/78586?v=4/",
+                RepositoryUrl = "https://api.github.com/users/robconery/repos/"
+            };
+
+            expectedResult.AssertAreEqual(result);
+
+
 
 
         }
