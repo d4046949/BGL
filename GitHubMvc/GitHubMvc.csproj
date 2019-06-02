@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructureMapStartUp.cs" />
     <Compile Include="Areas\Search\Models\UserProfileViewModel.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="CustomAttributes\PageAttribute.cs" />
     <Compile Include="Areas\Search\SearchAreaRegistration.cs" />
     <Compile Include="Areas\Search\Controllers\SearchGitHubController.cs" />
@@ -244,7 +245,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -261,6 +261,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ProjectViewModel.cshtml" />
     <Content Include="Views\Shared\GitHub404Error.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
