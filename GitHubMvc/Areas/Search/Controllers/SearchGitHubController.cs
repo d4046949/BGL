@@ -1,13 +1,10 @@
-﻿using System.Data.SqlClient;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using GitHubApi;
 using GitHubApi.Api;
 using GitHubApi.CustomExceptions;
 using GitHubMvc.Areas.Search.Models;
 using GitHubMvc.CustomAttributes;
-using Newtonsoft.Json;
 
 namespace GitHubMvc.Areas.Search.Controllers
 {

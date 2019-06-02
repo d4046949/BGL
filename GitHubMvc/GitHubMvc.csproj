@@ -256,7 +256,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Areas\Search\Views\SearchGitHub\Search.cshtml" />
     <Content Include="Areas\Search\Views\SearchGitHub\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ProjectViewModel.cshtml" />

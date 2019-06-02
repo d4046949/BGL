@@ -24,7 +24,7 @@ namespace GitHubApi.Api
         public async Task<UserProfile> GetUserProfileByName(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException();
-            var url = new UriBuilder(_configuration.GetUrl);
+            var url = new UriBuilder($"{_configuration.GetUrl}/users/{name}");
             return await ExecuteRequest<UserProfile>(url.ToString(),
                 o => throw new ResourceNotFoundOnGitHubException("Failed to find a user profile containing " + name));
         }
