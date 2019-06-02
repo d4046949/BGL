@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using GitHubApi;
+using GitHubApi.Api;
+using GitHubApi.CustomExceptions;
 using GitHubMvc.Areas.Search.Models;
 using GitHubMvc.CustomAttributes;
 using Newtonsoft.Json;
@@ -25,6 +28,7 @@ namespace GitHubMvc.Areas.Search.Controllers
 
 
         [HttpPost, ValidateAntiForgeryToken]
+        [HandleError(ExceptionType = typeof(ResourceNotFoundOnGitHubException), View = "GitHub404Error")]
         public async Task<ActionResult> Index(SearchModel model)
         {
             if (ModelState.IsValid)
